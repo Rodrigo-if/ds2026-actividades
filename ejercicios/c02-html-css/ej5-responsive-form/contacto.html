@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">      <!-- Codificación para acentos y ñ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Para que se vea bien en celulares -->
+    <title>Contacto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="titulo">Contacto</h1>
+    </header>
+    <form>
+        <p>Si desea contactarme, por favor complete el siguiente formulario:</p>
+        <div class="container4">
+            <label for="nombre">Nombre:</label>
+            <input type="text" placeholder="Ingrese su nombre" required>
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" placeholder="Ingrese su correo electrónico" required>
+        </div>
+
+        <br><label for="mensaje">Mensaje:</label><br>
+        <textarea type="text" placeholder="Ingrese el mensaje" rows="3" minlength="20"></textarea>
+
+        <input id="enviar" type="submit" value="Enviar">
+    </form>
+    <a href="index.html">Volver al índice</a>
+</body>
+
+</html>

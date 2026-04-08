@@ -1,0 +1,157 @@
+/*Aplica box-sizing a todos los elementos*/
+html {
+    box-sizing: border-box;
+}
+
+/* Variables*/
+:root {
+    --color-fuente: #181818;
+    --color-borde: #2c3e50;
+    --fuente: 'Arial', sans-serif;
+}
+
+/*Estilos generales*/
+body {
+    background-color: #94abca;
+}
+
+header {
+    background-color: var(--color-borde);
+    color: white;
+    padding: 20px;
+}
+
+p {
+    font-family: var(--fuente);
+    color: var(--color-fuente);
+    line-height: 1.5;
+    text-align: justify;
+}
+
+a {
+    font-family: var(--fuente);
+    background-color: var(--color-borde);
+    padding: 10px 15px;
+    color: white;
+}
+
+form {
+    border-color: var(--color-borde);
+    border: 2px solid;
+    background-color: #a3bfe3;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    font-family: var(--fuente);
+    color: var(--color-fuente);
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+textarea {
+    font-family: var(--fuente);
+    color: var(--color-fuente);
+    resize: none;
+    margin-bottom: 5px;
+}
+
+/*Estilos por clase*/
+.container1 {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 1rem;
+    margin-top: 10px;
+}
+
+.container2 {
+    border-color: var(--color-borde);
+    border: 2px solid;
+    background-color: #a3bfe3;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+}
+
+.container2 li {
+    margin-left: 15px;
+    font-family: var(--fuente);
+    color: var(--color-fuente);
+}
+
+.container3 {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    align-items: stretch;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.titulo {
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.container4 {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    margin-top: 10px;
+}
+
+/*Estilos por id*/
+#fotoPerfil {
+    border-color: var(--color-borde);
+    border: 2px solid;
+}
+
+#enviar {
+    font-family: var(--fuente);
+    background-color: var(--color-borde);
+    padding: 10px 15px;
+    color: white;
+}
+
+/*Media Queries*/
+/* Mobile First Approach */
+.container{
+    padding: 1rem;
+    flex-direction: column;
+}
+/* Tablet */
+@media (min-width: 768px) {
+    .container {
+        padding: 2rem;
+        flex-direction: row;
+    }
+    .container3 {
+        gap: 2rem;
+        flex-direction: row;
+    }
+    .container4 {
+        flex-direction: row;
+    }
+}
+/* Desktop */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .container3 {
+        gap: 5rem;
+        flex-direction: row;
+    }
+    .container4 {
+        flex-direction: row;
+    }
+}
