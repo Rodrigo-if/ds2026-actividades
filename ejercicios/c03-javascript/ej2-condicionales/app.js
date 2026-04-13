@@ -1,24 +1,32 @@
-//switch clasificar nota
-const clasificarNota = () => {
+//Función para poder recibir la nota por un input desde HTML
+const devolverNota = () => {
     const nota = parseFloat(document.getElementById("nota").value);
-    switch (true) {
-        case (nota < 4): console.log("Desaprobado"); break;
-        case (nota >= 8): console.log("Promocionado"); break;
-        case (nota >= 4): console.log("Aprobado"); break;
+//switch clasificar nota
+    const clasificarNota = (nota) => {
+        switch (true) {
+            case (nota < 4): return "Desaprobado";
+            case (nota >= 8): return "Promocionado";
+            case (nota >= 4): return "Aprobado";
+        }
     }
+    console.log(clasificarNota(nota));
 }
 
-//switch días de la semana
-const diaDeLaSemana = () => {
+//Función para poder recibir el día por un input desde HTML
+const devolverDia = () => {
     const dia = parseInt(document.getElementById("dia").value);
-    switch (dia) {
-        case 1: console.log("Lunes"); break;
-        case 2: console.log("Martes"); break;
-        case 3: console.log("Miércoles"); break;
-        case 4: console.log("Jueves"); break;
-        case 5: console.log("Viernes"); break;
-        case 6: console.log("Sábado (fin de semana)"); break;
-        case 7: console.log("Domingo (fin de semana)"); break;
-        default: console.log("Número de día inválido");
+//switch días de la semana
+    const diaDeLaSemana = (dia) => {
+        switch (dia) {
+            case 1: return "Lunes";
+            case 2: return "Martes";
+            case 3: return "Miércoles";
+            case 4: return "Jueves";
+            case 5: return "Viernes";
+            case 6: return "Sábado (fin de semana)";
+            case 7: return "Domingo (fin de semana)";
+            default: return "Número de día inválido";
+        }
     }
+    console.log(diaDeLaSemana(dia));
 }
