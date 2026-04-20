@@ -7,7 +7,7 @@
     <title>Index</title>
 </head>
 
-<body>
+<body onload="renderizar(lista_libros)">
     <h1>Catálogo</h1>
     <input type="text" id="filtroAutor" placeholder="Escribir autor">
     <button id="filtrar" onclick="renderizar(buscarPorAutor(document.getElementById('filtroAutor').value))">Filtrar</button>

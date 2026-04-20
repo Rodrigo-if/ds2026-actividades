@@ -46,11 +46,14 @@ function renderizar(libros: Libro[]): void {    //Función para renderizar los l
         for (let i = 0; i < libros.length; i++) {
             const libro = libros[i];
             const item = document.createElement('li');
-            item.textContent = `${libro.titulo} - ${libro.autor} - $${libro.precio}`;       //Agrego el título, autor y precio como strings de la lista
+            item.textContent = `${libro.titulo} - ${libro.autor} - $${libro.precio}`;           //Agrego el título, autor y precio como strings de la lista
             lista.appendChild(item);
         }
     }
     if (promedio) {
-        promedio.textContent = `Precio promedio: $${precioPromedio(libros).toFixed(2)}`;    //Agrego el precio promedio con dos decimales
+        promedio.textContent = "";                                                              //Si no hay libros, limpio el texto del promedio
+        if (libros.length > 0) {
+            promedio.textContent = `Precio promedio: $${precioPromedio(libros).toFixed(2)}`;    //Agrego el precio promedio con dos decimales
+        }        
     }
 }

@@ -39,6 +39,9 @@ function renderizar(libros) {
         }
     }
     if (promedio) {
-        promedio.textContent = `Precio promedio: $${precioPromedio(libros).toFixed(2)}`; //Agrego el precio promedio con dos decimales
+        promedio.textContent = ""; //Si no hay libros, limpio el texto del promedio
+        if (libros.length > 0) {
+            promedio.textContent = `Precio promedio: $${precioPromedio(libros).toFixed(2)}`; //Agrego el precio promedio con dos decimales
+        }
     }
 }
