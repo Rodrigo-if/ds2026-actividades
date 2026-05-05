@@ -1,0 +1,57 @@
+:root {
+    --color-fuente: white;
+    --color-fuente-hover: #E0D6C3;
+    --fuente-principal: 'Roboto', sans-serif;
+}
+
+body {
+    background-image: url('../img/body-bg.png');
+    background-size: cover;
+    background-position: center;
+    color: var(--color-fuente);
+    font-family: var(--fuente-principal);
+}
+
+.navbar-bg {
+    background-image: url('../img/navbar-bg.png');
+    background-size: 100% 200%;
+    background-position: center;
+    z-index: 0;
+}
+
+.navbar-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+.navbar .nav-link, .navbar .navbar-brand, .navbar .nav-link.active,
+.btn, .row .col-md-4 .card .card-body .card-title, p, h1 {
+    color: var(--color-fuente);
+    font-family: var(--fuente-principal);
+    font-weight: bold;
+}
+
+.card {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.navbar .nav-link:hover, .navbar .nav-link:focus, .btn:hover, .btn:focus {
+  color: var(--color-fuente-hover);
+}
+
+.btn {
+    background-color: rgba(133, 133, 133, 0.3);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Clase para ponerle background al hero */
+.hero-bg {
+    background-image: url('../img/hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    color: var(--color-fuente);
+    margin-top: 20px;
+}
