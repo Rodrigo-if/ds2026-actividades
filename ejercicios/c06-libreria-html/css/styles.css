@@ -39,6 +39,14 @@ body {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+#busquedaCatalogo {
+    font-family: var(--fuente-principal);
+    background-color: rgba(133, 133, 133, 0.3);
+    border: 1px solid #ccc;
+    color: #000;
+}
+
+
 .card-img-top {
     margin-top: 10px;
     width: 100%;

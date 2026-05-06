@@ -37,18 +37,17 @@ function obtenerQ(s: string): string | null {
 }
 
 // Renderizar solo los primeros 6 como destacados
-let destacados: LibroOL[] = []; // Variable global para almacenar los libros destacados y poder acceder a ellos desde la función guardarLibro
-async function renderizarDestacados() {
-    const contenedor = document.getElementById("destacados");
+let catalogo: LibroOL[] = []; // Variable global para almacenar los libros destacados y poder acceder a ellos desde la función guardarLibro
+async function renderizarLibros(id: string, query: string, n: number) {
+    const contenedor = document.getElementById(id);
     if (!contenedor) return;
-    const q = obtenerQ("bestseller"); // Si no hay q, usamos "bestseller" como default
-    if (!q){
-        console.warn("No se proporcionó un término de búsqueda válido para destacados.");
-        return;
-    }
-    const libros = await obtenerLibros(q); // 🔑 query que devuelve destacados
-    destacados = libros.slice(0, 6); // cortamos los primeros 6
-    contenedor.innerHTML = destacados.map((libro, index) => `
+    const q = obtenerQ(query);
+    if (!q) return;
+    const cargando = document.getElementById("mensajeCarga");
+    if (cargando) cargando.textContent = "Cargando...";
+    const libros = await obtenerLibros(q);
+    catalogo = libros.slice(0, n); // cortamos los primeros n
+    contenedor.innerHTML = catalogo.map((libro, index) => `
         <div class="card mb-3 gap-3" style="width: 18rem;">
             <img src="${libro.cover_i ? `https://covers.openlibrary.org/b/id/${libro.cover_i}-L.jpg` : 'placeholder.jpg'}" class="card-img-top" alt="Portada del libro">
             <div class="card-body d-flex flex-column">
@@ -60,6 +59,13 @@ async function renderizarDestacados() {
             </div>
         </div>
     `).join("");
+    if (cargando) {
+        if (libros.length === 0) {
+        cargando.textContent = "Sin resultados por ahora.";
+        return;
+        }
+        cargando.textContent = "";
+    }    
 }
 
 //Guardar el libro seleccionado en localStorage para mostrarlo en la página de detalles
@@ -68,7 +74,7 @@ async function renderizarDestacados() {
 //Por ahora, para simplificar, guardo el objeto completo del libro seleccionado
 function guardarLibro(btn: HTMLButtonElement) {
   const index = parseInt(btn.getAttribute("data-index") || "0", 10);
-  const libro = destacados[index]; // destacados está en el mismo scope
+  const libro = catalogo[index];
   localStorage.setItem("libroSeleccionado", JSON.stringify(libro));
   window.location.href = "./libro.html";
 }
@@ -86,4 +92,30 @@ function cargarLibroSeleccionado() {
     if (autor) autor.textContent = libro.author_name?.join(", ") || "Autor desconocido";
     if (portada) portada.src = libro.cover_i? `https://covers.openlibrary.org/b/id/${libro.cover_i}-L.jpg`: "placeholder.jpg";
     if (precio) precio.textContent = `$${libro.precio.toFixed(2)}`;
+}
+
+async function filtrarCatalogo() {
+    const input = document.getElementById("busquedaCatalogo") as HTMLInputElement;
+    const contenedor = document.getElementById("catalogo");
+    if (!input || !contenedor) return;
+    const q = input.value.toLowerCase();
+    if (!q) {
+        renderizarLibros('catalogo', 'bestseller', 30);
+        return;
+    }
+    renderizarLibros('catalogo', q, 30);
+}
+
+const boton = document.getElementById("botonInicio");
+if (boton) {
+    boton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+}
+
+const botonVolver = document.getElementById("botonVolver");
+if (botonVolver) {
+    botonVolver.addEventListener("click", () => {
+        history.back(); // vuelve a la página anterior
+    });
 }

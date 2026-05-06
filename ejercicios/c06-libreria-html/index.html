@@ -10,7 +10,7 @@
     <title>Index</title>
 </head>
 
-<body  onload="renderizarDestacados()">
+<body  onload="renderizarLibros('destacados', 'bestseller', 6)">    <!-- idContenedor, query, n -->
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-bg">
         <div class="container-fluid">
@@ -38,9 +38,12 @@
     </div>
     <!-- grilla -->
     <div class="container">
-        <h1 class="text-center my-5">Libros destacados</h1>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <h1 class="text-center my-5">Libros destacados</h1>
+            <p id="mensajeCarga"></p>
+        </div>
         <div class="row d-flex justify-items-center justify-content-center gap-5" id="destacados">
-            <!-- Aquí se renderizarán los libros destacados -->
+            <!-- Acá se renderizan los libros destacados -->
         </div>
     </div>
     <script src="./js/data.js"></script>
