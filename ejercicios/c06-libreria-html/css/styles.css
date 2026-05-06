@@ -8,14 +8,15 @@ body {
     background-image: url('../img/body-bg.png');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     color: var(--color-fuente);
     font-family: var(--fuente-principal);
 }
 
 .navbar-bg {
     background-image: url('../img/navbar-bg.png');
-    background-size: 100% 200%;
-    background-position: center;
+    background-size: 100% 150%;
+    background-position: top;
     z-index: 0;
 }
 
@@ -54,4 +55,20 @@ body {
     background-position: center;
     color: var(--color-fuente);
     margin-top: 20px;
+}
+
+.decoracion-guirnaldas {
+    position: absolute;
+    top: 65px; /* debajo del navbar, un poco superpuesto */
+    width: 100%;
+    object-fit: fill;
+    z-index: max-content; /* para que esté por encima de todo */
+    pointer-events: none;
+}
+
+.decoracion-guirnaldas img {
+  display: block;       /* evita espacios extra */
+  width: 100%;          /* ocupa todo el ancho */
+  height: 100px;        /* ajustá la altura a lo que necesites */
+  object-fit: fill;     /* estira/aplasta la imagen */
 }
