@@ -28,7 +28,7 @@ body {
   z-index: -1;
 }
 
-.navbar .nav-link, .navbar .navbar-brand, .navbar .nav-link.active,
+.navbar .nav-link, .navbar .navbar-brand, .navbar .nav-link.active, .form-label,
 .btn, .row, .col-md-4, .card, .card-body, .card-title, p, h1, h2, h3, h4, h5, h6 {
     color: var(--color-fuente);
     font-family: var(--fuente-principal);
@@ -39,13 +39,19 @@ body {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-#busquedaCatalogo {
+#busquedaCatalogo, #mensajeForm, #mailForm, #nombreForm, #opcionForm {
     font-family: var(--fuente-principal);
     background-color: rgba(133, 133, 133, 0.3);
     border: 1px solid #ccc;
-    color: #000;
+    color: var(--color-fuente-hover);
 }
 
+#opcionForm option {
+    font-family: var(--fuente-principal);
+    background-color: rgba(133, 133, 133, 0.3);
+    border: 1px solid #ccc;
+    color: black;
+}
 
 .card-img-top {
     margin-top: 10px;
