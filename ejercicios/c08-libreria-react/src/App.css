@@ -6,11 +6,17 @@
 
 body {
     background-image: url('./img/body-bg.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-attachment: fixed;
     color: var(--color-fuente);
     font-family: var(--fuente-principal);
+    margin: 0 !important;
+}
+
+.App {
+    min-height: 100vh;
+    width: 100% !important;
 }
 
 .navbar-bg {
@@ -116,4 +122,10 @@ body {
   width: 100%;          /* ocupa todo el ancho */
   height: 100px;        /* ajustá la altura a lo que necesites */
   object-fit: fill;     /* estira/aplasta la imagen */
+}
+
+/* Para que el root ocupe todo el ancho y no tenga bordes laterales */
+#root {
+    width: 100% !important;
+    border-inline: none;
 }
