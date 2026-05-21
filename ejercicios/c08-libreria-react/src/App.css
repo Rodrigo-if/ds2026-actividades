@@ -21,11 +21,11 @@ body {
 }
 
 .navbar-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0,0,0,0.3);
-  z-index: -1;
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.3);
+    z-index: -1;
 }
 
 .navbar .nav-link, .navbar .navbar-brand, .navbar .nav-link.active, .form-label,
