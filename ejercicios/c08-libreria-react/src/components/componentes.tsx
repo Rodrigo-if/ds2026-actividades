@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react'
 import {Card, Button} from 'react-bootstrap'
 import { obtenerLibros } from '../services/metodos'
 import type { LibroOL } from '../services/metodos'
+import logoLibreria from '../img/logoLibreria.png'
+import guirnaldas from '../img/guirnaldas.png'
 import '../App.css'
 
 //LibroCard
@@ -51,7 +53,7 @@ export function Catalogo({ query, n }: { query: string; n: number }) {
   if (libros.length === 0) return <p>Sin resultados por ahora.</p>;
 
   return (
-    <div className="d-flex flex-wrap justify-content-center gap-3">
+    <div className="d-flex flex-wrap justify-content-center gap-5">
       {libros.map((libro, index) => (
         <LibroCard
           key={index}
@@ -60,6 +62,47 @@ export function Catalogo({ query, n }: { query: string; n: number }) {
           cover_i={libro.cover_i?.toString()}
         />
       ))}
+    </div>
+  );
+}
+
+//hero
+export function Hero() {
+  return (
+    <div className="p-5 rounded-3 hero-bg">
+        <div className="container-fluid py-5 hero-content">
+            <h1 className="display-5 fw-bold">Bienvenido a la librería virtual</h1>
+            <p className="col-md-8 fs-4">Explora nuestro catálogo de libros y encuentra tu próxima lectura favorita.</p>
+            <Button className="btn btn-lg">Ver catálogo</Button>
+        </div>
+    </div>
+  );
+}
+
+//navbar
+export function Navbar() {
+  return (
+    <nav className="navbar navbar-expand-lg navbar-bg">
+        <div className="container-fluid">
+            <a className="navbar-brand" href="#">
+                <img src={logoLibreria} width="65" height="65" className="d-inline-block align-text-center"/>
+                Librería virtual
+            </a>
+            <div className="navbar-nav me-auto mb-lg-0 navbar-links">
+                <a className="nav-link active" aria-current="page" href="#">Inicio</a>
+                <a className="nav-link" href="#">Catálogo</a>
+                <a className="nav-link" href="#">Contacto</a>
+            </div>
+        </div>
+    </nav>
+  );
+}
+
+//guirnaldas
+export function Guirnaldas() {
+  return (
+    <div className="decoracion-guirnaldas">
+        <img src={guirnaldas} alt="Decoración"/>
     </div>
   );
 }

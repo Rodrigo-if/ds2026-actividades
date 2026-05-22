@@ -14,16 +14,17 @@ body {
     margin: 0 !important;
 }
 
-.App {
-    min-height: 100vh;
-    width: 100% !important;
+main.container.my-5 {
+    margin-left: 0 auto !important;
+    margin-right: 0 auto !important;
 }
 
 .navbar-bg {
     background-image: url('./img/navbar-bg.png');
     background-size: 100% 150%;
     background-position: top;
-    z-index: 0;
+    z-index: 10;
+    position: relative;
 }
 
 .navbar-bg::before {
@@ -76,6 +77,11 @@ body {
   color: var(--color-fuente-hover);
 }
 
+.navbar-nav {
+    flex-direction: row;
+    gap: 20px;
+}
+
 .btn {
     background-color: rgba(133, 133, 133, 0.128);
     transition: background-color 0.3s, color 0.3s;
@@ -83,7 +89,7 @@ body {
 }
 
 .btn:hover {
-  background-color: rgba(97, 97, 97, 0.3) !important;
+  background-color: rgba(246, 246, 246, 0.2) !important;
   border-color: rgba(57, 57, 57, 0.5);
 }
 
@@ -95,7 +101,7 @@ body {
 }
 
 .btn:active {
-  background-color: rgba(97, 97, 97, 0.5) !important;
+  background-color: rgba(246, 246, 246, 0.3) !important;
   color: var(--color-fuente-hover) !important;
   border-color: rgba(57, 57, 57, 0.5) !important;
 }
@@ -108,20 +114,25 @@ body {
     margin-top: 20px;
 }
 
+.hero-content {
+    text-align: left;
+    margin-left: 0.5vw;
+}
+
 .decoracion-guirnaldas {
     position: absolute;
-    top: 65px; /* debajo del navbar, un poco superpuesto */
+    top: calc(100% -10px);
     width: 100%;
     object-fit: fill;
-    z-index: max-content; /* para que esté por encima de todo */
+    z-index: 9999; /* para que esté por encima de todo */
     pointer-events: none;
 }
 
 .decoracion-guirnaldas img {
-  display: block;       /* evita espacios extra */
-  width: 100%;          /* ocupa todo el ancho */
-  height: 100px;        /* ajustá la altura a lo que necesites */
-  object-fit: fill;     /* estira/aplasta la imagen */
+    margin-top: -2%;
+    display: block;       /* evita espacios extra */
+    width: 100%;          /* ocupa todo el ancho */
+    object-fit: fill;     /* estira/aplasta la imagen */
 }
 
 /* Para que el root ocupe todo el ancho y no tenga bordes laterales */
