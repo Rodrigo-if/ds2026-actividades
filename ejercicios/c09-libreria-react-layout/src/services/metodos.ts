@@ -1,9 +1,4 @@
-export interface LibroOL {
-    title: string;
-    author_name?: string[];
-    cover_i?: number;
-    key: string;
-}
+import type { LibroOL } from "../types/libroOL";
 
 //Función asincrónica para el fetch
 export async function obtenerLibros(q: string): Promise<LibroOL[]> {
