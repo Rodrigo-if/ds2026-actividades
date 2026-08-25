@@ -28,5 +28,5 @@ export async function update(req: Request, res: Response) {
 export async function remove(req: Request, res: Response) {
     const borrado = await libroService.remove(Number(req.params.id));
     if (!borrado) return res.status(404).json({ error: "Libro no encontrado" });
-    return res.status(204).send(); // 204 = sin body. No lleva .json()
+    return res.status(204).send();
 }
