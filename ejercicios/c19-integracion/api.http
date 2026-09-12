@@ -1,0 +1,85 @@
+@baseUrl = http://localhost:3000
+
+### Hello
+GET {{baseUrl}}/
+
+### Listar libros
+GET {{baseUrl}}/api/libros
+
+### Autores
+GET {{baseUrl}}/api/autores/2
+
+### Libros disponibles
+GET {{baseUrl}}/api/libros?disponible=disponible
+
+### Crear un libro
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "title": "Rayuela",
+  "author_name": ["Julio Cortázar"],
+  "cover_i": 1234567,
+  "key": "/works/OL10274W",
+  "precio": 7000,
+  "disponible": "disponible"
+}
+
+### Crear un autor
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{
+  "nombre": "Julio Cortázar",
+  "nacionalidad": "Argentina"
+}
+
+### Actualizar un libro
+PUT {{baseUrl}}/api/libros/1
+Content-Type: application/json
+
+{
+  "title": "El Principito",
+  "author_name": ["Antoine de Saint-Exupéry"],
+  "cover_i": 7654321,
+  "key": "/works/OL27448W",
+  "precio": 38000,
+  "disponible": "disponible"
+}
+
+### Actualizar un autor
+PUT {{baseUrl}}/api/autores/1
+Content-Type: application/json
+
+{
+  "nombre": "de Saint-Exupéry, Antoine",
+  "nacionalidad": "frances"
+}
+
+### Borrar un libro
+DELETE {{baseUrl}}/api/libros/3
+
+### Borrar un autor
+DELETE {{baseUrl}}/api/autores/2
+
+
+### ERRORES INTENCIONALES
+
+### 400 - sin título
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+{ "precio": 5000, "imagen": "https://…", "autorId": 1 }
+### 400 - id inválido
+GET {{baseUrl}}/api/libros/abc
+### 400 - el autor no existe (formato válido, dato imposible)
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+{ "titulo": "Huérfano", "precio": 5000, "imagen": "https://…", "autorId":
+9999 }
+### 409 - autor duplicado
+POST {{baseUrl}}/api/autores
+{ "nombre": "Gabriel García Márquez", "nacionalidad": "Colombia" }
+### 409 - borrar un autor con libros (onDelete: Restrict)
+DELETE {{baseUrl}}/api/autores/1
+### 404 - actualizar algo que no existe
+PUT {{baseUrl}}/api/libros/9999
