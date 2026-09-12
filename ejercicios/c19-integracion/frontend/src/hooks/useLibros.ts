@@ -1,24 +1,41 @@
-import { useFetch } from "./useFetch";
-import type { LibroOL } from "../types/libroOL.ts";
-import type { LibroCrudo } from "../types/libroCrudo.ts";
+import { useState, useEffect } from "react";
+import type { Libro } from "../types/libro";
+import { apiFetch } from "../services/api";
 
-export function useLibros(query: string, n: number) {
-  const { data, loading, error } = useFetch<{ docs: LibroCrudo[] }>(
-    `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}`
-  );
-  const libros: LibroOL[] =
-    data?.docs.map((libro) => ({
-      title: libro.title,
-      author_name: libro.author_name?.map((a) =>
-        typeof a === "string" ? a : a.name
-      ) || [],
-      cover_i:
-        typeof libro.cover_i === "string"
-          ? parseInt(libro.cover_i)
-          : libro.cover_i,
-      key: libro.key,
-      precio: libro.precio,
-      disponible: libro.disponible,
-    })) ?? [];
-  return { libros: libros.slice(0, n), loading, error };
+export function useLibros() {
+  const [libros, setLibros] = useState<Libro[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelado = false;
+
+    async function cargarLibros() {
+      try {
+        setLoading(true);
+        setError(null);
+        // Llamada a la API real del backend
+        const data = await apiFetch<Libro[]>("/libros");
+        if (!cancelado) {
+          setLibros(data);
+        }
+      } catch (err) {
+        if (!cancelado) {
+          setError((err as Error).message || "Error al cargar los libros");
+        }
+      } finally {
+        if (!cancelado) {
+          setLoading(false);
+        }
+      }
+    }
+
+    cargarLibros();
+
+    return () => {
+      cancelado = true;
+    };
+  }, []);
+
+  return { libros, loading, error };
 }
