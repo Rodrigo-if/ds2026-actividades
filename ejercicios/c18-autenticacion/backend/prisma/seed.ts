@@ -1,4 +1,21 @@
 import { prisma } from "../src/config/prisma";
+import { Rol } from "../src/generated/prisma/client";
+import bcrypt from "bcrypt";
+
+const usuarios = [
+  {
+    email: "admin@libreria.test",
+    nombre: "Admin",
+    rol: Rol.ADMIN,
+    password: "Admin1234",
+  },
+  {
+    email: "cliente@libreria.test",
+    nombre: "Cliente",
+    rol: Rol.CLIENTE,
+    password: "Cliente1234",
+  },
+];
 
 const autores = [
   { nombre: "Antoine de Saint-Exupéry", nacionalidad: "Francia" },
@@ -13,12 +30,14 @@ const autores = [
   { nombre: "Ray Bradbury", nacionalidad: "Estados Unidos" },
   { nombre: "Alexander Shvets", nacionalidad: "Rusia" }
 ];
+
 const categorias = [
   { nombre: "Novela" },
   { nombre: "Ensayo" },
   { nombre: "Técnico" },
   { nombre: "Ficción" }
 ];
+
 const libros = [
   {
     "titulo": "El principito",
@@ -103,14 +122,43 @@ const libros = [
 ];
 
 async function main() {
-  await prisma.autor.createMany({ data: autores });
-  await prisma.categoria.createMany({ data: categorias });
-  for (const { autor, categorias, ...datos } of libros) {
-    await prisma.libro.create({ data: {
-      ...datos,
-      autor: { connect: { nombre: autor } },
-      categorias: { connect: categorias.map(nombre => ({ nombre })) },
-    }});
+  // 1. Cargar usuarios iniciales con contraseña hasheada
+  for (const { password, ...datos } of usuarios) {
+    const passwordHash = await bcrypt.hash(password, 10);
+    await prisma.usuario.upsert({
+      where: { email: datos.email },
+      update: {},
+      create: {
+        ...datos,
+        passwordHash,
+      },
+    });
   }
+
+  // 2. Cargar datos del catálogo si no existen previamente
+  const countAutores = await prisma.autor.count();
+  if (countAutores === 0) {
+    await prisma.autor.createMany({ data: autores });
+    await prisma.categoria.createMany({ data: categorias });
+    for (const { autor, categorias: cats, ...datos } of libros) {
+      await prisma.libro.create({
+        data: {
+          ...datos,
+          autor: { connect: { nombre: autor } },
+          categorias: { connect: cats.map((nombre) => ({ nombre })) },
+        },
+      });
+    }
+  }
+
+  console.log("Seed ejecutado exitosamente.");
 }
-main();
+
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
