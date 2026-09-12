@@ -9,7 +9,7 @@ function Home() {
       <Hero />
       <div className="container my-5 d-flex flex-column align-items-center gap-5">
         <h1>Libros destacados</h1>
-        <Catalogo query="bestseller" n={6} />
+        <Catalogo query="" n={6} />
       </div>
     </main>
   );

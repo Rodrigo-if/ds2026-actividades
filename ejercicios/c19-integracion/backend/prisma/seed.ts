@@ -43,7 +43,7 @@ const libros = [
     "titulo": "El principito",
     "autor": "Antoine de Saint-Exupéry",
     "precio": 4500,
-    "imagen": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80",
+    "imagen": "https://m.media-amazon.com/images/I/71s8pGzVwBL._AC_UF1000,1000_QL80_.jpg",
     "disponible": true,
     "categorias": ["Novela", "Ensayo"]
   },
@@ -51,7 +51,7 @@ const libros = [
     "titulo": "Patrones de diseño",
     "autor": "Alexander Shvets",
     "precio": 8500,
-    "imagen": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
+    "imagen": "https://refactoring.guru/images/patterns/book/web-cover-es-2x.png",
     "disponible": true,
     "categorias": ["Técnico"]
   },
@@ -59,7 +59,7 @@ const libros = [
     "titulo": "Farenheit 451",
     "autor": "Ray Bradbury",
     "precio": 5200,
-    "imagen": "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80",
+    "imagen": "https://m.media-amazon.com/images/I/71OFqSRFDgL._AC_UF1000,1000_QL80_.jpg",
     "disponible": false,
     "categorias": ["Novela", "Ensayo"]
   },
@@ -67,7 +67,7 @@ const libros = [
     "titulo": "Cien años de soledad",
     "autor": "Gabriel García Márquez",
     "precio": 6200,
-    "imagen": "https://images.unsplash.com/photo-1473187983305-f615310e7daa?auto=format&fit=crop&w=400&q=80",
+    "imagen": "https://m.media-amazon.com/images/I/81xU2eJ4YSL._AC_UF1000,1000_QL80_.jpg",
     "disponible": true,
     "categorias": ["Novela", "Ensayo"]
   },
@@ -75,7 +75,7 @@ const libros = [
     "titulo": "1984",
     "autor": "George Orwell",
     "precio": 5400,
-    "imagen": "https://images.unsplash.com/photo-1473755504818-b72b6dfdc0a1?auto=format&fit=crop&w=400&q=80",
+    "imagen": "https://m.media-amazon.com/images/I/71rpa1-kyvL._AC_UF1000,1000_QL80_.jpg",
     "disponible": true,
     "categorias": ["Novela", "Ensayo"]
   },
@@ -83,7 +83,7 @@ const libros = [
     "titulo": "El alquimista",
     "autor": "Paulo Coelho",
     "precio": 4300,
-    "imagen": "https://images.unsplash.com/photo-1519682577862-22b62b24e493?auto=format&fit=crop&w=400&q=80",
+    "imagen": "https://m.media-amazon.com/images/I/71aFt4+OTOL._AC_UF1000,1000_QL80_.jpg",
     "disponible": true,
     "categorias": ["Novela", "Ensayo"]
   },
@@ -91,7 +91,7 @@ const libros = [
     "titulo": "Sapiens: De animales a dioses",
     "autor": "Yuval Noah Harari",
     "precio": 7800,
-    "imagen": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
+    "imagen": "https://m.media-amazon.com/images/I/713jIoMO3UL._AC_UF1000,1000_QL80_.jpg",
     "disponible": false,
     "categorias": ["Ensayo", "Técnico"]
   },
@@ -99,7 +99,7 @@ const libros = [
     "titulo": "El código Da Vinci",
     "autor": "Dan Brown",
     "precio": 5100,
-    "imagen": "https://images.unsplash.com/photo-1496104679561-38b73d6fcdf0?auto=format&fit=crop&w=400&q=80",
+    "imagen": "https://m.media-amazon.com/images/I/815W65zG1yL._AC_UF1000,1000_QL80_.jpg",
     "disponible": true,
     "categorias": ["Novela", "Ensayo"]
   },
@@ -107,7 +107,7 @@ const libros = [
     "titulo": "Matar a un ruiseñor",
     "autor": "Harper Lee",
     "precio": 4700,
-    "imagen": "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80",
+    "imagen": "https://m.media-amazon.com/images/I/71FxgtFKcQL._AC_UF1000,1000_QL80_.jpg",
     "disponible": true,
     "categorias": ["Ficción"]
   },
@@ -115,14 +115,14 @@ const libros = [
     "titulo": "La sombra del viento",
     "autor": "Carlos Ruiz Zafón",
     "precio": 6900,
-    "imagen": "https://images.unsplash.com/photo-1529480821492-a27f2b0b4b79?auto=format&fit=crop&w=400&q=80",
+    "imagen": "https://m.media-amazon.com/images/I/91pX4RmsR6L._AC_UF1000,1000_QL80_.jpg",
     "disponible": false,
     "categorias": ["Novela", "Ensayo"]
   }
 ];
 
 async function main() {
-  // 1. Cargar usuarios iniciales con contraseña hasheada
+  // Cargar usuarios iniciales
   for (const { password, ...datos } of usuarios) {
     const passwordHash = await bcrypt.hash(password, 10);
     await prisma.usuario.upsert({
@@ -135,23 +135,38 @@ async function main() {
     });
   }
 
-  // 2. Cargar datos del catálogo si no existen previamente
-  const countAutores = await prisma.autor.count();
-  if (countAutores === 0) {
-    await prisma.autor.createMany({ data: autores });
-    await prisma.categoria.createMany({ data: categorias });
-    for (const { autor, categorias: cats, ...datos } of libros) {
-      await prisma.libro.create({
-        data: {
-          ...datos,
-          autor: { connect: { nombre: autor } },
-          categorias: { connect: cats.map((nombre) => ({ nombre })) },
-        },
-      });
-    }
+  // Desconectar relaciones N:M implícitas antes de limpiar
+  const librosExistentes = await prisma.libro.findMany({
+    select: { id: true }
+  });
+
+  for (const libro of librosExistentes) {
+    await prisma.libro.update({
+      where: { id: libro.id },
+      data: { categorias: { set: [] } },
+    });
   }
 
-  console.log("Seed ejecutado exitosamente.");
+  // Limpieza de tablas
+  await prisma.libro.deleteMany();
+  await prisma.autor.deleteMany();
+  await prisma.categoria.deleteMany();
+
+  // Inserción de datos con portadas reales
+  await prisma.autor.createMany({ data: autores });
+  await prisma.categoria.createMany({ data: categorias });
+
+  for (const { autor, categorias: cats, ...datos } of libros) {
+    await prisma.libro.create({
+      data: {
+        ...datos,
+        autor: { connect: { nombre: autor } },
+        categorias: { connect: cats.map((nombre) => ({ nombre })) },
+      },
+    });
+  }
+
+  console.log("Seed con portadas reales ejecutado exitosamente.");
 }
 
 main()

@@ -1,6 +1,7 @@
 import { obtenerToken } from "./sesion";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+// Si la variable de entorno es undefined, usa localhost:3000 por defecto
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 export async function apiFetch<T>(
   ruta: string,
@@ -14,7 +15,9 @@ export async function apiFetch<T>(
     ...opciones.headers,
   };
 
-  const res = await fetch(`${BASE_URL}${ruta}`, {
+  const endpoint = ruta.startsWith("/") ? ruta : `/${ruta}`;
+
+  const res = await fetch(`${BASE_URL}${endpoint}`, {
     ...opciones,
     headers,
   });
