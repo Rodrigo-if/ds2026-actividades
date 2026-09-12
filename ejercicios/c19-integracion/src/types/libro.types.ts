@@ -1,1 +1,0 @@
-export type { LibroModel as Libro } from "../generated/prisma/models";
