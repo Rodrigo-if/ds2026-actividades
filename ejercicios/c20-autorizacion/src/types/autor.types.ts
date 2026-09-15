@@ -1,1 +1,0 @@
-export type { AutorModel as Autor } from "../generated/prisma/models";
