@@ -6,6 +6,7 @@ import Contacto from './pages/Contacto.tsx';
 import DetalleLibro from "./pages/Detalle.tsx";
 import LibroNuevo from "./pages/LibroNuevo.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
+import RutaProtegida from "./components/RutaProtegida.tsx";
 import { useState } from 'react';
 import type { LibroValidado } from "./schemas/libroSchema.ts";
 import librosIniciales from './services/librosIniciales.ts';
@@ -15,21 +16,21 @@ import './assets/styles/App.css';
 function App() {
   const [libros, setLibros] = useState<LibroValidado[]>(librosIniciales);
   const agregarLibro = (nuevo: LibroValidado) => { setLibros([nuevo, ...libros]); };
+  
   return (
     <Layout>
       <Routes>
-        {/* Página principal */}
+        {/* Rutas públicas */}
         <Route path="/" element={<Home />} />
-        {/* Página de inicio de sesión */}
         <Route path="/login" element={<LoginPage />} />
-        {/* Página de catálogo */}
         <Route path="/catalogo" element={<CatalogoPag />} />
-        {/* Página de contacto */}
         <Route path="/contacto" element={<Contacto />} />
-        {/* Página de detalle */}
         <Route path="/detalle-libro/:id/*" element={<DetalleLibro />} />
-        {/* Página de libro nuevo */}
-        <Route path="/libros/nuevo" element={<LibroNuevo onAgregar={agregarLibro} />} />
+
+        {/* Ruta protegida solo para rol ADMIN */}
+        <Route element={<RutaProtegida rolRequerido="ADMIN" />}>
+          <Route path="/libros/nuevo" element={<LibroNuevo onAgregar={agregarLibro} />} />
+        </Route>
       </Routes>
     </Layout>
   );

@@ -150,6 +150,14 @@ main.container.my-5 {
   border-color: rgba(57, 57, 57, 0.5) !important;
 }
 
+.btn:disabled, .btn.disabled {
+    background-color: rgba(133, 133, 133, 0.08) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    border-color: rgba(57, 57, 57, 0.2) !important;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
 .hero-bg {
     background-image: url('../img/hero-bg.png');
     background-size: cover;

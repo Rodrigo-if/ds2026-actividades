@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/useAuth.ts'
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const { usuario, estaAutenticado, logout, tieneRol } = useAuth();
+  const { estaAutenticado, logout, tieneRol } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -31,16 +31,11 @@ export default function Navbar() {
                 </div>
             </div>
 
-            <div className="ms-auto d-flex align-items-center gap-3">
+            <div className="ms-auto">
                 {estaAutenticado ? (
-                    <>
-                      <span className="text-muted">
-                        Hola, <strong>{usuario?.nombre}</strong> ({usuario?.rol})
-                      </span>
-                      <button onClick={handleLogout} className="btn">
-                          Cerrar Sesión
-                      </button>
-                    </>
+                    <button onClick={handleLogout} className="btn">
+                        Cerrar Sesión
+                    </button>
                 ) : (
                     <Link to="/login" className="btn text-decoration-none">
                         Iniciar Sesión
