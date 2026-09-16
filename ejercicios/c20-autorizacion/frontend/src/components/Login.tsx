@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import { Container, Card, Form, Button, Alert } from "react-bootstrap";
-import { apiFetch } from "../services/api";
-import { guardarToken } from "../services/sesion";
+import { useNavigate } from "react-router-dom";
 import { loginSchema, type LoginFormData } from "../schemas/loginSchema";
+import { useAuth } from "../hooks/useAuth.ts";
 
-interface LoginProps {
-  onLoginSuccess: () => void;
-}
+export const Login: React.FC = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-interface LoginResponse {
-  token: string;
-  usuario: {
-    id: number;
-    email: string;
-    nombre: string;
-  };
-}
-
-export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: "",
@@ -30,7 +20,6 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Limpiar error del campo al modificarlo
     if (errores[name]) {
       setErrores((prev) => ({ ...prev, [name]: "" }));
     }
@@ -58,13 +47,8 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
     setCargando(true);
 
     try {
-      const res = await apiFetch<LoginResponse>("/auth/login", {
-        method: "POST",
-        body: JSON.stringify(resultado.data),
-      });
-
-      guardarToken(res.token);
-      onLoginSuccess();
+      await login(resultado.data);
+      navigate("/");
     } catch (err) {
       setErrorApi((err as Error).message || "Error al iniciar sesión");
     } finally {

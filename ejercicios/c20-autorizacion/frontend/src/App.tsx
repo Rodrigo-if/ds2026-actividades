@@ -5,7 +5,7 @@ import CatalogoPag from './pages/Catalogo.tsx';
 import Contacto from './pages/Contacto.tsx';
 import DetalleLibro from "./pages/Detalle.tsx";
 import LibroNuevo from "./pages/LibroNuevo.tsx";
-import { LoginPage } from "./pages/LoginPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
 import { useState } from 'react';
 import type { LibroValidado } from "./schemas/libroSchema.ts";
 import librosIniciales from './services/librosIniciales.ts';
