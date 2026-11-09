@@ -1,0 +1,189 @@
+@baseUrl = http://localhost:3000
+@tokenAdmin = {{loginAdmin.response.body.token}}
+@tokenCliente = {{loginCliente.response.body.token}}
+
+### Hello
+GET {{baseUrl}}/
+
+### -------------------------------------------------------------------
+### AUTENTICACIÓN
+### -------------------------------------------------------------------
+
+### 1. Registrar un nuevo cliente
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{
+  "nombre": "Usuario Ejemplo",
+  "email": "nuevo.cliente@libreria.test",
+  "password": "Password123"
+}
+
+### 2. Login con credenciales inválidas (debe retornar 401)
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@libreria.test",
+  "password": "PasswordIncorrecta123"
+}
+
+### 3. Login exitoso como ADMIN
+# @name loginAdmin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@libreria.test",
+  "password": "Admin1234"
+}
+
+### 4. Login exitoso como CLIENTE
+# @name loginCliente
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "cliente@libreria.test",
+  "password": "Cliente1234"
+}
+
+### 5. Consultar /yo sin token (debe retornar 401)
+GET {{baseUrl}}/api/auth/yo
+
+### 6. Consultar /yo con token válido
+GET {{baseUrl}}/api/auth/yo
+Authorization: Bearer {{tokenAdmin}}
+
+### -------------------------------------------------------------------
+### CONSULTAS PÚBLICAS (Sin Autenticación)
+### -------------------------------------------------------------------
+
+### Listar libros
+GET {{baseUrl}}/api/libros
+
+### Libros disponibles
+GET {{baseUrl}}/api/libros?disponible=disponible
+
+### Obtener autor por ID
+GET {{baseUrl}}/api/autores/2
+
+### -------------------------------------------------------------------
+### OPERACIONES RESTRINGIDAS (Requieren Token de ADMIN)
+### -------------------------------------------------------------------
+
+### Intentar crear un libro sin token (debe retornar 401)
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Libro Anónimo",
+  "precio": 1500,
+  "autorId": 1
+}
+
+### Intentar crear un libro como CLIENTE (debe retornar 403)
+POST {{baseUrl}}/api/libros
+Authorization: Bearer {{tokenCliente}}
+Content-Type: application/json
+
+{
+  "titulo": "Libro por Cliente",
+  "precio": 1500,
+  "autorId": 1
+}
+
+### Crear un libro como ADMIN (Exitoso)
+POST {{baseUrl}}/api/libros
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "titulo": "Rayuela",
+  "precio": 7000,
+  "disponible": true,
+  "autorId": 1,
+  "categoriasIds": [1]
+}
+
+### Crear un autor como ADMIN
+POST {{baseUrl}}/api/autores
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nombre": "Julio Cortázar",
+  "nacionalidad": "Argentina"
+}
+
+### Actualizar un libro como ADMIN
+PUT {{baseUrl}}/api/libros/1
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "titulo": "El Principito",
+  "precio": 38000,
+  "disponible": true
+}
+
+### Actualizar un autor como ADMIN
+PUT {{baseUrl}}/api/autores/1
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{
+  "nombre": "de Saint-Exupéry, Antoine",
+  "nacionalidad": "frances"
+}
+
+### Intentar borrar un libro como CLIENTE (debe retornar 403)
+DELETE {{baseUrl}}/api/libros/3
+Authorization: Bearer {{tokenCliente}}
+
+### Borrar un libro como ADMIN
+DELETE {{baseUrl}}/api/libros/3
+Authorization: Bearer {{tokenAdmin}}
+
+### Borrar un autor como ADMIN
+DELETE {{baseUrl}}/api/autores/2
+Authorization: Bearer {{tokenAdmin}}
+
+### -------------------------------------------------------------------
+### ERRORES INTENCIONALES Y VALIDACIONES
+### -------------------------------------------------------------------
+
+### 400 - sin título
+POST {{baseUrl}}/api/libros
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{ "precio": 5000, "imagen": "https://...", "autorId": 1 }
+
+### 400 - id inválido
+GET {{baseUrl}}/api/libros/abc
+
+### 400 - el autor no existe (formato válido, dato imposible)
+POST {{baseUrl}}/api/libros
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{ "titulo": "Huérfano", "precio": 5000, "imagen": "https://...", "autorId": 9999 }
+
+### 409 - autor duplicado
+POST {{baseUrl}}/api/autores
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{ "nombre": "Gabriel García Márquez", "nacionalidad": "Colombia" }
+
+### 409 - borrar un autor con libros (onDelete: Restrict)
+DELETE {{baseUrl}}/api/autores/1
+Authorization: Bearer {{tokenAdmin}}
+
+### 404 - actualizar algo que no existe
+PUT {{baseUrl}}/api/libros/9999
+Authorization: Bearer {{tokenAdmin}}
+Content-Type: application/json
+
+{ "titulo": "Inexistente", "precio": 1000 }
