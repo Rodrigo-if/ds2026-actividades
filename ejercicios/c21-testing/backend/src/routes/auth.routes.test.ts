@@ -17,9 +17,9 @@ describe("POST /api/auth/login", () => {
   });
 });
 
-describe("POST /api/auth/register", () => {
+describe("POST /api/auth/registro", () => {
   it("responde 400 si faltan campos obligatorios para el registro", async () => {
-    const res = await request(app).post("/api/auth/register").send({
+    const res = await request(app).post("/api/auth/registro").send({
       nombre: "Nuevo Usuario",
     });
     expect(res.status).toBe(400);
