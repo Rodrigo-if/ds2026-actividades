@@ -758,6 +758,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const LibroScalarFieldEnum = {
   id: 'id',
   titulo: 'titulo',
+  descripcion: 'descripcion',
   autorId: 'autorId',
   precio: 'precio',
   imagen: 'imagen',
@@ -810,6 +811,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 

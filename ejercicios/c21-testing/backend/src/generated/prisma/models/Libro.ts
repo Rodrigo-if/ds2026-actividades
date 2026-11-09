@@ -41,6 +41,7 @@ export type LibroSumAggregateOutputType = {
 export type LibroMinAggregateOutputType = {
   id: number | null
   titulo: string | null
+  descripcion: string | null
   autorId: number | null
   precio: number | null
   imagen: string | null
@@ -50,6 +51,7 @@ export type LibroMinAggregateOutputType = {
 export type LibroMaxAggregateOutputType = {
   id: number | null
   titulo: string | null
+  descripcion: string | null
   autorId: number | null
   precio: number | null
   imagen: string | null
@@ -59,6 +61,7 @@ export type LibroMaxAggregateOutputType = {
 export type LibroCountAggregateOutputType = {
   id: number
   titulo: number
+  descripcion: number
   autorId: number
   precio: number
   imagen: number
@@ -82,6 +85,7 @@ export type LibroSumAggregateInputType = {
 export type LibroMinAggregateInputType = {
   id?: true
   titulo?: true
+  descripcion?: true
   autorId?: true
   precio?: true
   imagen?: true
@@ -91,6 +95,7 @@ export type LibroMinAggregateInputType = {
 export type LibroMaxAggregateInputType = {
   id?: true
   titulo?: true
+  descripcion?: true
   autorId?: true
   precio?: true
   imagen?: true
@@ -100,6 +105,7 @@ export type LibroMaxAggregateInputType = {
 export type LibroCountAggregateInputType = {
   id?: true
   titulo?: true
+  descripcion?: true
   autorId?: true
   precio?: true
   imagen?: true
@@ -196,6 +202,7 @@ export type LibroGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type LibroGroupByOutputType = {
   id: number
   titulo: string
+  descripcion: string | null
   autorId: number
   precio: number
   imagen: string
@@ -228,6 +235,7 @@ export type LibroWhereInput = {
   NOT?: Prisma.LibroWhereInput | Prisma.LibroWhereInput[]
   id?: Prisma.IntFilter<"Libro"> | number
   titulo?: Prisma.StringFilter<"Libro"> | string
+  descripcion?: Prisma.StringNullableFilter<"Libro"> | string | null
   autorId?: Prisma.IntFilter<"Libro"> | number
   precio?: Prisma.IntFilter<"Libro"> | number
   imagen?: Prisma.StringFilter<"Libro"> | string
@@ -239,6 +247,7 @@ export type LibroWhereInput = {
 export type LibroOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
+  descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
   autorId?: Prisma.SortOrder
   precio?: Prisma.SortOrder
   imagen?: Prisma.SortOrder
@@ -253,6 +262,7 @@ export type LibroWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.LibroWhereInput[]
   NOT?: Prisma.LibroWhereInput | Prisma.LibroWhereInput[]
   titulo?: Prisma.StringFilter<"Libro"> | string
+  descripcion?: Prisma.StringNullableFilter<"Libro"> | string | null
   autorId?: Prisma.IntFilter<"Libro"> | number
   precio?: Prisma.IntFilter<"Libro"> | number
   imagen?: Prisma.StringFilter<"Libro"> | string
@@ -264,6 +274,7 @@ export type LibroWhereUniqueInput = Prisma.AtLeast<{
 export type LibroOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
+  descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
   autorId?: Prisma.SortOrder
   precio?: Prisma.SortOrder
   imagen?: Prisma.SortOrder
@@ -281,6 +292,7 @@ export type LibroScalarWhereWithAggregatesInput = {
   NOT?: Prisma.LibroScalarWhereWithAggregatesInput | Prisma.LibroScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Libro"> | number
   titulo?: Prisma.StringWithAggregatesFilter<"Libro"> | string
+  descripcion?: Prisma.StringNullableWithAggregatesFilter<"Libro"> | string | null
   autorId?: Prisma.IntWithAggregatesFilter<"Libro"> | number
   precio?: Prisma.IntWithAggregatesFilter<"Libro"> | number
   imagen?: Prisma.StringWithAggregatesFilter<"Libro"> | string
@@ -289,6 +301,7 @@ export type LibroScalarWhereWithAggregatesInput = {
 
 export type LibroCreateInput = {
   titulo: string
+  descripcion?: string | null
   precio: number
   imagen: string
   disponible?: boolean
@@ -299,6 +312,7 @@ export type LibroCreateInput = {
 export type LibroUncheckedCreateInput = {
   id?: number
   titulo: string
+  descripcion?: string | null
   autorId: number
   precio: number
   imagen: string
@@ -308,6 +322,7 @@ export type LibroUncheckedCreateInput = {
 
 export type LibroUpdateInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   precio?: Prisma.IntFieldUpdateOperationsInput | number
   imagen?: Prisma.StringFieldUpdateOperationsInput | string
   disponible?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -318,6 +333,7 @@ export type LibroUpdateInput = {
 export type LibroUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   autorId?: Prisma.IntFieldUpdateOperationsInput | number
   precio?: Prisma.IntFieldUpdateOperationsInput | number
   imagen?: Prisma.StringFieldUpdateOperationsInput | string
@@ -328,6 +344,7 @@ export type LibroUncheckedUpdateInput = {
 export type LibroCreateManyInput = {
   id?: number
   titulo: string
+  descripcion?: string | null
   autorId: number
   precio: number
   imagen: string
@@ -336,6 +353,7 @@ export type LibroCreateManyInput = {
 
 export type LibroUpdateManyMutationInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   precio?: Prisma.IntFieldUpdateOperationsInput | number
   imagen?: Prisma.StringFieldUpdateOperationsInput | string
   disponible?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -344,6 +362,7 @@ export type LibroUpdateManyMutationInput = {
 export type LibroUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   autorId?: Prisma.IntFieldUpdateOperationsInput | number
   precio?: Prisma.IntFieldUpdateOperationsInput | number
   imagen?: Prisma.StringFieldUpdateOperationsInput | string
@@ -353,6 +372,7 @@ export type LibroUncheckedUpdateManyInput = {
 export type LibroCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
+  descripcion?: Prisma.SortOrder
   autorId?: Prisma.SortOrder
   precio?: Prisma.SortOrder
   imagen?: Prisma.SortOrder
@@ -368,6 +388,7 @@ export type LibroAvgOrderByAggregateInput = {
 export type LibroMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
+  descripcion?: Prisma.SortOrder
   autorId?: Prisma.SortOrder
   precio?: Prisma.SortOrder
   imagen?: Prisma.SortOrder
@@ -377,6 +398,7 @@ export type LibroMaxOrderByAggregateInput = {
 export type LibroMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
+  descripcion?: Prisma.SortOrder
   autorId?: Prisma.SortOrder
   precio?: Prisma.SortOrder
   imagen?: Prisma.SortOrder
@@ -401,6 +423,10 @@ export type LibroOrderByRelationAggregateInput = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -497,6 +523,7 @@ export type LibroUncheckedUpdateManyWithoutCategoriasNestedInput = {
 
 export type LibroCreateWithoutAutorInput = {
   titulo: string
+  descripcion?: string | null
   precio: number
   imagen: string
   disponible?: boolean
@@ -506,6 +533,7 @@ export type LibroCreateWithoutAutorInput = {
 export type LibroUncheckedCreateWithoutAutorInput = {
   id?: number
   titulo: string
+  descripcion?: string | null
   precio: number
   imagen: string
   disponible?: boolean
@@ -544,6 +572,7 @@ export type LibroScalarWhereInput = {
   NOT?: Prisma.LibroScalarWhereInput | Prisma.LibroScalarWhereInput[]
   id?: Prisma.IntFilter<"Libro"> | number
   titulo?: Prisma.StringFilter<"Libro"> | string
+  descripcion?: Prisma.StringNullableFilter<"Libro"> | string | null
   autorId?: Prisma.IntFilter<"Libro"> | number
   precio?: Prisma.IntFilter<"Libro"> | number
   imagen?: Prisma.StringFilter<"Libro"> | string
@@ -552,6 +581,7 @@ export type LibroScalarWhereInput = {
 
 export type LibroCreateWithoutCategoriasInput = {
   titulo: string
+  descripcion?: string | null
   precio: number
   imagen: string
   disponible?: boolean
@@ -561,6 +591,7 @@ export type LibroCreateWithoutCategoriasInput = {
 export type LibroUncheckedCreateWithoutCategoriasInput = {
   id?: number
   titulo: string
+  descripcion?: string | null
   autorId: number
   precio: number
   imagen: string
@@ -591,6 +622,7 @@ export type LibroUpdateManyWithWhereWithoutCategoriasInput = {
 export type LibroCreateManyAutorInput = {
   id?: number
   titulo: string
+  descripcion?: string | null
   precio: number
   imagen: string
   disponible?: boolean
@@ -598,6 +630,7 @@ export type LibroCreateManyAutorInput = {
 
 export type LibroUpdateWithoutAutorInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   precio?: Prisma.IntFieldUpdateOperationsInput | number
   imagen?: Prisma.StringFieldUpdateOperationsInput | string
   disponible?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -607,6 +640,7 @@ export type LibroUpdateWithoutAutorInput = {
 export type LibroUncheckedUpdateWithoutAutorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   precio?: Prisma.IntFieldUpdateOperationsInput | number
   imagen?: Prisma.StringFieldUpdateOperationsInput | string
   disponible?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -616,6 +650,7 @@ export type LibroUncheckedUpdateWithoutAutorInput = {
 export type LibroUncheckedUpdateManyWithoutAutorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   precio?: Prisma.IntFieldUpdateOperationsInput | number
   imagen?: Prisma.StringFieldUpdateOperationsInput | string
   disponible?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -623,6 +658,7 @@ export type LibroUncheckedUpdateManyWithoutAutorInput = {
 
 export type LibroUpdateWithoutCategoriasInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   precio?: Prisma.IntFieldUpdateOperationsInput | number
   imagen?: Prisma.StringFieldUpdateOperationsInput | string
   disponible?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -632,6 +668,7 @@ export type LibroUpdateWithoutCategoriasInput = {
 export type LibroUncheckedUpdateWithoutCategoriasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   autorId?: Prisma.IntFieldUpdateOperationsInput | number
   precio?: Prisma.IntFieldUpdateOperationsInput | number
   imagen?: Prisma.StringFieldUpdateOperationsInput | string
@@ -641,6 +678,7 @@ export type LibroUncheckedUpdateWithoutCategoriasInput = {
 export type LibroUncheckedUpdateManyWithoutCategoriasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   autorId?: Prisma.IntFieldUpdateOperationsInput | number
   precio?: Prisma.IntFieldUpdateOperationsInput | number
   imagen?: Prisma.StringFieldUpdateOperationsInput | string
@@ -681,6 +719,7 @@ export type LibroCountOutputTypeCountCategoriasArgs<ExtArgs extends runtime.Type
 export type LibroSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   titulo?: boolean
+  descripcion?: boolean
   autorId?: boolean
   precio?: boolean
   imagen?: boolean
@@ -693,6 +732,7 @@ export type LibroSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type LibroSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   titulo?: boolean
+  descripcion?: boolean
   autorId?: boolean
   precio?: boolean
   imagen?: boolean
@@ -703,6 +743,7 @@ export type LibroSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type LibroSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   titulo?: boolean
+  descripcion?: boolean
   autorId?: boolean
   precio?: boolean
   imagen?: boolean
@@ -713,13 +754,14 @@ export type LibroSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type LibroSelectScalar = {
   id?: boolean
   titulo?: boolean
+  descripcion?: boolean
   autorId?: boolean
   precio?: boolean
   imagen?: boolean
   disponible?: boolean
 }
 
-export type LibroOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "autorId" | "precio" | "imagen" | "disponible", ExtArgs["result"]["libro"]>
+export type LibroOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "descripcion" | "autorId" | "precio" | "imagen" | "disponible", ExtArgs["result"]["libro"]>
 export type LibroInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   autor?: boolean | Prisma.AutorDefaultArgs<ExtArgs>
   categorias?: boolean | Prisma.Libro$categoriasArgs<ExtArgs>
@@ -741,6 +783,7 @@ export type $LibroPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     titulo: string
+    descripcion: string | null
     autorId: number
     precio: number
     imagen: string
@@ -1172,6 +1215,7 @@ export interface Prisma__LibroClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface LibroFieldRefs {
   readonly id: Prisma.FieldRef<"Libro", 'Int'>
   readonly titulo: Prisma.FieldRef<"Libro", 'String'>
+  readonly descripcion: Prisma.FieldRef<"Libro", 'String'>
   readonly autorId: Prisma.FieldRef<"Libro", 'Int'>
   readonly precio: Prisma.FieldRef<"Libro", 'Int'>
   readonly imagen: Prisma.FieldRef<"Libro", 'String'>

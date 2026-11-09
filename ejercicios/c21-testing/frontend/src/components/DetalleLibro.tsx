@@ -60,7 +60,7 @@ export function InfoLibro() {
             className="rounded shadow-sm w-100"
             style={{ 
               maxHeight: '420px', 
-              objectFit: 'cover', 
+              objectFit: 'fill',
               aspectRatio: '3/4' 
             }}
             onError={(e) => {
