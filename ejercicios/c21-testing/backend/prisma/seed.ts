@@ -28,7 +28,8 @@ const autores = [
   { nombre: "Harper Lee", nacionalidad: "Estados Unidos" },
   { nombre: "Carlos Ruiz Zafón", nacionalidad: "España" },
   { nombre: "Ray Bradbury", nacionalidad: "Estados Unidos" },
-  { nombre: "Alexander Shvets", nacionalidad: "Rusia" }
+  { nombre: "Alexander Shvets", nacionalidad: "Rusia" },
+  { nombre: "Franz Kafka", nacionalidad: "Austria-Hungría" },
 ];
 
 const categorias = [
@@ -38,19 +39,7 @@ const categorias = [
   { nombre: "Ficción" }
 ];
 
-// Imagen genérica estable de libros para evitar enlaces rotos de Amazon
-const FALLBACK_LIBRO_IMG = "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80";
-
 const libros = [
-  {
-    "titulo": "El principito",
-    "descripcion": "Un tierno relato poético y filosófico sobre la soledad, la amistad, el amor y el sentido de la vida visto a través de los ojos de un pequeño príncipe proveniente de otro asteroide.",
-    "autor": "Antoine de Saint-Exupéry",
-    "precio": 4500,
-    "imagen": FALLBACK_LIBRO_IMG,
-    "disponible": true,
-    "categorias": ["Novela", "Ensayo"]
-  },
   {
     "titulo": "Patrones de diseño",
     "descripcion": "Guía esencial de programación orientada a objetos para reutilizar soluciones a problemas comunes en el desarrollo de software moderno.",
@@ -65,7 +54,7 @@ const libros = [
     "descripcion": "Una novela distópica que retrata una sociedad futura donde los libros están prohibidos y los bomberos se encargan de quemarlos.",
     "autor": "Ray Bradbury",
     "precio": 5200,
-    "imagen": FALLBACK_LIBRO_IMG,
+    "imagen": "https://m.media-amazon.com/images/I/71OFqSRFDgL._AC_UF1000,1000_QL80_.jpg",
     "disponible": false,
     "categorias": ["Novela", "Ensayo"]
   },
@@ -74,7 +63,7 @@ const libros = [
     "descripcion": "La obra maestra del realismo mágico que narra la historia de la familia Buendía en el pueblo mítico de Macondo.",
     "autor": "Gabriel García Márquez",
     "precio": 6200,
-    "imagen": FALLBACK_LIBRO_IMG,
+    "imagen": "https://covers.openlibrary.org/b/isbn/9780307474728-L.jpg",
     "disponible": true,
     "categorias": ["Novela", "Ensayo"]
   },
@@ -83,7 +72,7 @@ const libros = [
     "descripcion": "Clásico político y social que introduce conceptos icónicos como el Gran Hermano, la policía del pensamiento y la vigilancia masiva.",
     "autor": "George Orwell",
     "precio": 5400,
-    "imagen": FALLBACK_LIBRO_IMG,
+    "imagen": "https://m.media-amazon.com/images/I/71rpa1-kyvL._AC_UF1000,1000_QL80_.jpg",
     "disponible": true,
     "categorias": ["Novela", "Ensayo"]
   },
@@ -92,7 +81,7 @@ const libros = [
     "descripcion": "Una inspiradora fábula sobre seguir los sueños personales y escuchar los dictados del corazón.",
     "autor": "Paulo Coelho",
     "precio": 4300,
-    "imagen": FALLBACK_LIBRO_IMG,
+    "imagen": "https://m.media-amazon.com/images/I/71aFt4+OTOL._AC_UF1000,1000_QL80_.jpg",
     "disponible": true,
     "categorias": ["Novela", "Ensayo"]
   },
@@ -101,7 +90,7 @@ const libros = [
     "descripcion": "Un recorrido fascinante por la historia de la humanidad, desde nuestros ancestros cazadores-recolectores hasta las revoluciones tecnológicas modernas.",
     "autor": "Yuval Noah Harari",
     "precio": 7800,
-    "imagen": FALLBACK_LIBRO_IMG,
+    "imagen": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1703329310i/23692271.jpg",
     "disponible": false,
     "categorias": ["Ensayo", "Técnico"]
   },
@@ -110,7 +99,7 @@ const libros = [
     "descripcion": "Un thriller de misterio y conspiración religiosa que sigue al profesor Robert Langdon en la búsqueda de un secreto milenario.",
     "autor": "Dan Brown",
     "precio": 5100,
-    "imagen": FALLBACK_LIBRO_IMG,
+    "imagen": "https://upload.wikimedia.org/wikipedia/en/6/6b/DaVinciCode.jpg",
     "disponible": true,
     "categorias": ["Novela", "Ensayo"]
   },
@@ -119,17 +108,17 @@ const libros = [
     "descripcion": "Una conmovedora historia sobre la injusticia racial, la pérdida de la inocencia y el valor en el sur profundo de Estados Unidos.",
     "autor": "Harper Lee",
     "precio": 4700,
-    "imagen": FALLBACK_LIBRO_IMG,
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/4/4f/To_Kill_a_Mockingbird_%28first_edition_cover%29.jpg",
     "disponible": true,
     "categorias": ["Ficción"]
   },
   {
-    "titulo": "La sombra del viento",
-    "descripcion": "Un misterio literario ambientado en la Barcelona gótica de la posguerra, centrado en el enigmático 'Cementerio de los Libros Olvidados'.",
-    "autor": "Carlos Ruiz Zafón",
-    "precio": 6900,
-    "imagen": FALLBACK_LIBRO_IMG,
-    "disponible": false,
+    "titulo": "La metamorfosis",
+    "descripcion": "El relato absurdo y kafkiano sobre Gregorio Samsa, un comerciante que una mañana amanece convertido en un monstruoso insecto.",
+    "autor": "Franz Kafka",
+    "precio": 3900,
+    "imagen": "https://imgs.search.brave.com/wXVIoOiw4IUArI0c8wuYM1p1xucGDg3n3MbspNKF0yQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wZGxp/YnJvc2FyZy5jZG5z/dGF0aWNzMi5jb20v/dXN1YXJpcy9saWJy/b3MvdGh1bWJzL2Ey/OGU3NjkzLTVkMmMt/NGM5Ny1hZDc4LTlh/MzRiNzdkNWI1My9k/XzI5NV81MTAvcG9y/dGFkYV9sYS1tZXRh/bW9yZm9zaXNfXzIw/MjEwMTA3MTkxNS53/ZWJw",
+    "disponible": true,
     "categorias": ["Novela", "Ensayo"]
   }
 ];
@@ -175,7 +164,7 @@ async function main() {
     });
   }
 
-  console.log("Seed con descripciones y portadas limpias ejecutado exitosamente.");
+  console.log("Seed con portadas oficiales de Open Library ejecutado exitosamente.");
 }
 
 main()
