@@ -77,7 +77,7 @@ export function InfoLibro() {
             {libro.disponible ? 'Disponible' : 'Sin stock'}
           </span>
           <p className="mt-4 text-justify">
-            Sin descripción disponible para este libro.
+            {libro.descripcion || 'Sin descripción disponible para este libro.'}
           </p>
         </Col>
       </Row>
