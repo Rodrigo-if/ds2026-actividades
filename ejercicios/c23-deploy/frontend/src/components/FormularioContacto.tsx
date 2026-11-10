@@ -32,15 +32,15 @@ export function FormularioContacto() {
       <Form className="container my-5" style={{ maxWidth: "600px" }} onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="nombre">
           <Form.Label className="d-flex me-auto">Nombre</Form.Label>
-          <Form.Control type="text" name="nombre" id="nombreForm" value={formData.nombre} onChange={handleChange} required />
+          <Form.Control type="text" name="nombre" value={formData.nombre} onChange={handleChange} required />
         </Form.Group>
         <Form.Group className="mb-3" controlId="correo">
           <Form.Label className="d-flex me-auto">Correo electrónico</Form.Label>
-          <Form.Control type="email" name="correo" id="mailForm" value={formData.correo} onChange={handleChange} required />
+          <Form.Control type="email" name="correo" value={formData.correo} onChange={handleChange} required />
         </Form.Group>
         <Form.Group className="mb-3" controlId="asunto">
           <Form.Label className="d-flex me-auto">Asunto</Form.Label>
-          <Form.Select value={formData.asunto} onChange={handleChange} name="asunto" id="opcionForm" required>
+          <Form.Select value={formData.asunto} onChange={handleChange} name="asunto" required>
             <option>Consulta</option>
             <option>Sugerencia</option>
             <option>Reclamo</option>
@@ -48,7 +48,7 @@ export function FormularioContacto() {
         </Form.Group>
         <Form.Group className="mb-3" controlId="mensaje">
           <Form.Label className="d-flex me-auto">Mensaje</Form.Label>
-          <Form.Control as="textarea" rows={4} value={formData.mensaje} name="mensaje" id="mensajeForm" onChange={handleChange} required />
+          <Form.Control as="textarea" rows={4} value={formData.mensaje} name="mensaje" onChange={handleChange} required />
         </Form.Group>
         <div className="d-flex justify-content-end">
           <Button type="submit" variant="primary">Aceptar</Button>
