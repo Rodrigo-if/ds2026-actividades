@@ -33,6 +33,7 @@ main.container.my-5 {
     inset: 0;
     background-color: rgba(0,0,0,0.3);
     z-index: -1;
+    pointer-events: none;
 }
 
 .navbar .nav-link, .navbar .navbar-brand, .navbar .nav-link.active, .form-label,
@@ -121,11 +122,6 @@ main.container.my-5 {
   color: var(--color-fuente-hover);
 }
 
-.navbar-nav {
-    flex-direction: row;
-    gap: 20px;
-}
-
 .btn {
     background-color: rgba(133, 133, 133, 0.128);
     transition: background-color 0.3s, color 0.3s;
@@ -176,7 +172,7 @@ main.container.my-5 {
     top: calc(100% -10px);
     width: 100%;
     object-fit: fill;
-    z-index: 9999; /* para que esté por encima de todo */
+    z-index: 9999;
     pointer-events: none;
 }
 
@@ -185,6 +181,22 @@ main.container.my-5 {
     display: block;       /* evita espacios extra */
     width: 100%;          /* ocupa todo el ancho */
     object-fit: fill;     /* estira/aplasta la imagen */
+}
+
+.sidebar-mobile {
+    background-image: url('../img/sidebar-bg.jfif') !important;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    --bs-offcanvas-width: 250px; /* Ancho del sidebar */
+    z-index: 10000 !important;
+}
+
+/* Ajustar el z-index para que la capa oscura del offcanvas (backdrop) cubra las guirnaldas */
+.offcanvas-backdrop.show {
+    z-index: 10000 !important; /* Supera el 9999 de las guirnaldas */
+}
+
+.offcanvas.sidebar-mobile {
+    z-index: 10010 !important; /* Queda por encima del backdrop y de las guirnaldas */
 }
 
 /* Para que el root ocupe todo el ancho y no tenga bordes laterales */
@@ -208,6 +220,16 @@ main.container.my-5 {
 @media (min-width: 992px) {
     #eliminarAutor {
         right: 21%;
+    }
+    .navbar-nav {
+        flex-direction: row;
+        gap: 20px;
+    }
+    .navbar-collapse {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
     }
 }
 

@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { BrowserRouter } from "react-router-dom";
@@ -13,6 +13,16 @@ vi.mock("../../hooks/useAuth.ts", () => ({
 describe("Componente Navbar", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+
+    // Mock global de Bootstrap para JSDOM
+    Object.assign(window, {
+      bootstrap: {
+        Offcanvas: {
+          getInstance: vi.fn().mockReturnValue({ hide: vi.fn() }),
+          getOrCreateInstance: vi.fn().mockReturnValue({ hide: vi.fn() }),
+        },
+      },
+    });
   });
 
   it("muestra el botón de Iniciar Sesión cuando el usuario no está autenticado", () => {
@@ -31,7 +41,9 @@ describe("Componente Navbar", () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText(/iniciar sesión/i)).toBeInTheDocument();
+    // Como existen dos elementos (escritorio y mobile), verificamos que haya al menos uno disponible
+    const botonesLogin = screen.getAllByText(/iniciar sesión/i);
+    expect(botonesLogin.length).toBeGreaterThan(0);
     expect(screen.queryByText(/agregar libro/i)).not.toBeInTheDocument();
   });
 
@@ -54,11 +66,20 @@ describe("Componente Navbar", () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText(/cerrar sesión/i)).toBeInTheDocument();
-    expect(screen.getByText(/agregar libro/i)).toBeInTheDocument();
+    const botonesLogout = screen.getAllByText(/cerrar sesión/i);
+    const opcionesAgregarLibro = screen.getAllByText(/agregar libro/i);
 
-    const botonLogout = screen.getByText(/cerrar sesión/i);
-    await user.click(botonLogout);
+    expect(botonesLogout.length).toBeGreaterThan(0);
+    expect(opcionesAgregarLibro.length).toBeGreaterThan(0);
+
+    // Clickeamos el botón de escritorio (el primero)
+    await user.click(botonesLogout[0]);
+
+    // Disparamos el evento para liberar la navegación en el offcanvas si hizo falta
+    const offcanvasElement = document.getElementById("offcanvasNavbar");
+    if (offcanvasElement) {
+      fireEvent(offcanvasElement, new Event("hidden.bs.offcanvas"));
+    }
 
     expect(mockLogout).toHaveBeenCalled();
   });
