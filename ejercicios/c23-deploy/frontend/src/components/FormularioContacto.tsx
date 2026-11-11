@@ -60,8 +60,7 @@ export function FormularioContacto() {
         {/* Campo Correo */}
         <Form.Group className="mb-3" controlId="correo">
           <Form.Label className="d-flex me-auto">Correo electrónico</Form.Label>
-          <Form.Control 
-            type="email"
+          <Form.Control
             {...register("correo")} 
             isInvalid={!!errors.correo}
           />
